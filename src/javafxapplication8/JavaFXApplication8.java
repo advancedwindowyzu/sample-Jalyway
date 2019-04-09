@@ -8,12 +8,14 @@ package javafxapplication8;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -37,7 +39,7 @@ public class JavaFXApplication8 extends Application {
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("lastName"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("email"));
-        ObservableList list=FXCollections.observableArrayList(
+        ObservableList<Person> list=FXCollections.observableArrayList(
                 new Person("Lendle", "Tseng", "xxx@com.tw", "123"),
                 new Person("person2", "LastName", "xxx@com.tw", "456")
         );
@@ -51,6 +53,18 @@ public class JavaFXApplication8 extends Application {
         TextField textLastName=new TextField();
         TextField textEmail=new TextField();
         TextField textMobile=new TextField();
+        tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getClickCount()==2){
+                    Person person=(Person) tableView.getSelectionModel().getSelectedItem();
+                    textFirstName.setText(person.getFirstName());
+                    textLastName.setText(person.getLastName());
+                    textEmail.setText(person.getEmail());
+                    textMobile.setText(person.getMobile());
+                }
+            }
+        });
         vbox.getChildren().addAll(
                 new HBox(labelFirstName, textFirstName),
                 new HBox(labelLastName, textLastName),

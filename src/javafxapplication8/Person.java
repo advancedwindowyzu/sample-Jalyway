@@ -21,6 +21,14 @@ public class Person {
         this.email=email;
         this.mobile=mobile;
     }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
     
     public String getFirstName() {
         return firstName;
